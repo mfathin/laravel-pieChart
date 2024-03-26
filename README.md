@@ -1,3 +1,7 @@
+## Tool yang saya pakai dalam mengerjakan
+1. Bootstrap
+2. chartjs untuk Pie Chartnya
+
 ## Goals
 - Anda dapat men-develop dashboard berisi chart (bisa berupa pie chart, histogram, dsb) yang menampilkan jumlah karyawan per periode sesuai dengan filter yang dipilih. Tools frontend untuk membuat chart dapat dipilih sesuai dengan kebutuhan. Filter terdiri dari: 
   * Company
