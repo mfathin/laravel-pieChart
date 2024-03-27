@@ -11,6 +11,8 @@ Halaman dashboard yang terdapat komponen filter dan pie chart, ada di folder `\r
 
 Untuk database, anda bisa pergi ke `.env`. Saya mengganti nama database saya beserta portnya menjadi 3307.
 
+Apabila terjadi masalah, bisa email saya ke `mfathin57@gmail.com`.
+
 Terima Kasih.
 
 ## Goals
