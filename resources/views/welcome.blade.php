@@ -11,6 +11,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
     <!-- Styles -->
+    <!-- Custom styles sidebar-->
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
     <style>
         /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
         html {
@@ -407,20 +410,12 @@
 </head>
 
 <body>
-    <div class="mt-5">
+    @include('layout.sidebar')
 
-        <h2 style="width: 800px" class="m-auto">CHART TOTAL KARYAWAN BERDASARKAN PERIODE</h2>
+    @yield('content')
 
-        @include('components.filter')
-
-        <div style="width: 550px; height: 550px;" class="mx-auto">
-            <div id="noDataMessage" class="alert alert-info mt-5" style="display: none;">
-                No data available for the selected filter.
-            </div>
-            <canvas id="pieChart" width="400" height="400"></canvas>
-        </div>
-
-        <table class="mx-auto table table-hover table-bordered" id="dataTable">
+    {{-- Menampilkan table data --}}
+    {{-- <table class="mx-auto table table-hover table-bordered" id="dataTable">
             <thead>
                 <tr>
                     <th scope="col">No</th>
@@ -448,14 +443,12 @@
                 @endforeach
             </tbody>
             <p class="text-center">Total Pegawai Adalah: {{ $totalEmployees }}</p>
-            {{-- {{ $employees->links() }} --}}
-        </table>
+            {{ $employees->links() }}
+        </table> --}}
 
-        <footer class="bg-secondary text-white" style="height: 70px">
-            © Muhammad Fathin Adiva</footer>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
@@ -470,9 +463,10 @@
                 data: formData,
                 contentType: false,
                 processData: false,
-                success: function(data) {
-                    if (data && data.length > 0) {
-                        renderPieChart(data);
+                success: function(response) {
+                    if (response && response.data && response.data.length > 0) {
+                        var data = response.data;
+                        renderPieChart(data, response.total);
                         $('#noDataMessage').hide();
                     } else {
                         $('#noDataMessage').show();
@@ -487,7 +481,7 @@
             });
         });
 
-        function renderPieChart(data) {
+        function renderPieChart(data, total) {
             var labels = [];
             var values = [];
 
@@ -496,6 +490,7 @@
                 values.push(item.value);
             });
 
+            // Render pie chart
             var ctx = document.getElementById('pieChart').getContext('2d');
 
             if (window.myPieChart !== undefined) {
@@ -507,7 +502,7 @@
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: 'Jumlah Pegawai',
+                        label: 'Jumlah Karyawan',
                         data: values,
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.7)',
@@ -525,6 +520,9 @@
                     maintainAspectRatio: false
                 }
             });
+
+            // Display total
+            $('#totalEmployees').text('Jumlah Total Karyawan: ' + total);
         }
     </script>
 </body>

@@ -25,7 +25,7 @@ class EmployeeController extends Controller
         // ->paginate(10);
         $totalEmployees = $employees->count();
 
-        return view('welcome', compact('companies', 'divisions', 'genders', 'levels', 'periods', 'employees', 'totalEmployees'));
+        return view('layout.dashboard', compact('companies', 'divisions', 'genders', 'levels', 'periods', 'employees', 'totalEmployees'));
     }
 
     public function filter(Request $request)
@@ -48,13 +48,15 @@ class EmployeeController extends Controller
             ->toArray();
 
         $totalEmployee = [];
+        $total = 0;
         foreach ($employeeCounts as $period => $count) {
+            $total += $count;
             $totalEmployee[] = [
                 'name' => $period,
                 'value' => $count
             ];
         }
 
-        return response()->json($totalEmployee);
+        return response()->json(['data' => $totalEmployee, 'total' => $total]);
     }
 }
