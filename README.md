@@ -1,7 +1,16 @@
-## Tool yang saya pakai dalam mengerjakan
+## Introduction
+- Tools Yang Saya Gunakan
 1. Bootstrap
 2. chartjs untuk Pie Chartnya
-   
+3. Template Sidebar
+
+Halaman dashboard yang terdapat komponen filter dan pie chart, ada di folder `\resources\views\layout`.
+
+- Spesifik filter folder berada di `\resources\views\components\filter.blade.php`.
+- Spesifik pie chart folder berada di `\resources\views\components\chart-pie.blade.php`.
+
+Untuk database, anda bisa pergi ke `.env`. Saya mengganti nama database saya beserta portnya menjadi 3307.
+
 Terima Kasih.
 
 ## Goals
